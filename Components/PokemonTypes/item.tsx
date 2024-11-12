@@ -1,4 +1,4 @@
-import ColorScheme from "@/app/theme"
+import ColorScheme from "@/theme"
 import { Text, ColorSchemeName, StyleSheet, useColorScheme, View } from "react-native"
 
 type Props = {

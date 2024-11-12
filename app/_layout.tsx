@@ -1,6 +1,6 @@
 import { Stack } from "expo-router";
 import { useColorScheme } from "react-native";
-import ColorScheme from "./theme";
+import ColorScheme from "@/theme";
 
 export default function RootLayout() {
   const colors = ColorScheme(useColorScheme())
