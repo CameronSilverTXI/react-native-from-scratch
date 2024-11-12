@@ -1,5 +1,6 @@
-import { Text, View, StyleSheet, useColorScheme, ColorSchemeName } from "react-native";
+import { View, StyleSheet, useColorScheme, ColorSchemeName } from "react-native";
 import ColorScheme from "./theme";
+import PokemonTypes from "./Components/PokemonTypes";
 
 export default function Index() {
 
@@ -7,7 +8,7 @@ export default function Index() {
 
   return (
     <View style={createStyles(colorScheme).container}>
-      <Text style={createStyles(colorScheme).text}>Hello TXI engineers!</Text>
+        <PokemonTypes/>
     </View>
   );
 }
@@ -19,11 +20,6 @@ const createStyles = (colorSchemeName: ColorSchemeName) => {
     container: {
       flex: 1,
       backgroundColor: colors.background,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    text: {
-      color: colors.text,
     },
   });
 }
