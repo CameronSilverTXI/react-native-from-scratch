@@ -1,6 +1,6 @@
 import ColorScheme from "@/theme"
 import { Link } from "expo-router"
-import { Text, ColorSchemeName, StyleSheet, useColorScheme, View, Button } from "react-native"
+import { Text, ColorSchemeName, StyleSheet, useColorScheme, View, Button, TouchableNativeFeedback } from "react-native"
 
 type Props = {
     title: string,
@@ -16,12 +16,14 @@ const Item: React.FC<Props> = ({title, type}: Props) => {
     }
 
     return (
-        <View style={createStyles(colorScheme).container}>
-            <Text style={createStyles(colorScheme).text} >{title}</Text>
-            <Link href={`/type/${type}`} asChild >
-                <Button onPress={() => {}} title='>'/>
-            </Link>
-        </View>
+        <Link href={`/type/${type}`} asChild >
+            <TouchableNativeFeedback>
+                <View style={createStyles(colorScheme).container}>
+                    <Text style={createStyles(colorScheme).text} >{title}</Text>
+                    <Text style={createStyles(colorScheme).text} >{">"}</Text>
+                </View>
+            </TouchableNativeFeedback>
+        </Link>
     )
 }
 
@@ -37,7 +39,7 @@ const createStyles = (colorSchemeName: ColorSchemeName) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: 20,
-        paddingVertical: 10,
+        paddingVertical: 15,
       },
     text: {
         color: colors.text,
