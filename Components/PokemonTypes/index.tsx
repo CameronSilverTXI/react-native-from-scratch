@@ -5,7 +5,7 @@ import { Stack } from "expo-router";
 
 const PokemonTypes: React.FC = () => {
 
-  const DATA = Array.from({length: 20}, (_, i) => ({ type: `${i}`}))
+  const DATA = Array.from({length: 20}, (_, i) => ({ type: `${i + 1}`}))
 
   return (
     <FlashList

@@ -9,7 +9,7 @@ type Props = {
 
 const PokemonList: React.FC<Props> = ({type}: Props) => {
 
-  const DATA = Array.from({length: 20}, (_, i) => ({ name: `Pokemon ${i}`}))
+  const DATA = Array.from({length: 20}, (_, i) => ({ name: `Pokemon ${i + 1}`}))
 
   return (
     <FlashList
