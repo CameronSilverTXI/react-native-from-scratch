@@ -8,14 +8,11 @@ const PokemonTypes: React.FC = () => {
   const DATA = Array.from({length: 20}, (_, i) => ({ type: `${i}`}))
 
   return (
-    <>
-      <Stack.Screen options={{title: "Main"}} />
-      <FlashList
-          data={DATA}
-          renderItem={({ item }) => <Item title={`Option: ${item.type}`} type={item.type}/>}
-          estimatedItemSize={200}
-      />
-    </>
+    <FlashList
+        data={DATA}
+        renderItem={({ item }) => <Item title={`Option: ${item.type}`} type={item.type}/>}
+        estimatedItemSize={200}
+    />
   );
 }
 

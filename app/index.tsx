@@ -1,6 +1,7 @@
 import { View, StyleSheet, useColorScheme, ColorSchemeName } from "react-native";
 import ColorScheme from "@/theme";
 import PokemonTypes from "@/Components/PokemonTypes";
+import { Stack } from "expo-router";
 
 export default function Index() {
 
@@ -8,6 +9,7 @@ export default function Index() {
 
   return (
     <View style={createStyles(colorScheme).container}>
+        <Stack.Screen options={{title: "Main"}} />
         <PokemonTypes/>
     </View>
   );
