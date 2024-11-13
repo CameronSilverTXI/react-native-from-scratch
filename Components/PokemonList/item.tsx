@@ -18,7 +18,7 @@ const Item: React.FC<Props> = ({title, type}: Props) => {
     return (
         <View style={createStyles(colorScheme).container}>
             <Text style={createStyles(colorScheme).text} >{title}</Text>
-            <Link href={`/type/${type}`} asChild >
+            <Link href={`/pokemon/${type}`} asChild >
                 <Button onPress={() => {}} title='>'/>
             </Link>
         </View>
