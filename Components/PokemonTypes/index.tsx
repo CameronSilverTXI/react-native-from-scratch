@@ -4,6 +4,7 @@ import Item from "./item";
 import LoadingOrChildren from "../LoadingOrChildren";
 import { useQuery } from "@tanstack/react-query";
 import axiosClient from "@/utils/axiosClient";
+import extractIdFromURL from "@/utils/extractId";
 
 type PokemonTypesData = {
   count: number,
@@ -37,26 +38,13 @@ const PokemonTypes: React.FC = () => {
     return pokemonTypesData.results.sort((itemA, itemB) => (itemA.name.localeCompare(itemB.name)))
   }, [pokemonTypesData])
 
-  // Pulls the type-id out of the URL
-  const typeURLToTypeId = (typeURL: string): string => {
-    try {
-      const pathSplit = new URL(typeURL).pathname.split('/');
-      if (pathSplit.length <= 1) {
-        return "1"
-      }
-      return pathSplit[pathSplit.length - 2]
-    } catch {
-      return "1"
-    }
-  }
-
   const overrideMessage = (!pokemonTypesData || isError) ? "Unable to display Pokémon types." : undefined
   
   return (
     <LoadingOrChildren isLoading={isPending} overrideMessage={overrideMessage}>
       <FlashList
           data={pokemonTypes}
-          renderItem={({ item }) => <Item title={item.name} type={typeURLToTypeId(item.url)}/>}
+          renderItem={({ item }) => <Item title={item.name} type={extractIdFromURL(item.url)}/>}
           estimatedItemSize={200}
       />
     </LoadingOrChildren>
