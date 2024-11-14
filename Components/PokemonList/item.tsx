@@ -4,16 +4,11 @@ import { Text, ColorSchemeName, StyleSheet, useColorScheme, View, Button, Toucha
 
 type Props = {
     title: string,
-    type: string,
 }
 
-const Item: React.FC<Props> = ({title, type}: Props) => {
+const Item: React.FC<Props> = ({title}: Props) => {
 
     const colorScheme = useColorScheme();
-
-    const onPress = (pokemonType: string) => {
-
-    }
 
     return (
         <Link href={`/info/${title}`} asChild >
