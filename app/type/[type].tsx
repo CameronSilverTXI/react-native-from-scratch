@@ -18,7 +18,7 @@ const Pokemon: React.FC = () => {
   return (
     <View style={createStyles(colorScheme).container}>
         <Stack.Screen options={{title: title}} />
-        <PokemonList type={`${type}`} updateTitle={(typeName) => setTitle(_.startCase(`${typeName} Pokémon`))} />
+        <PokemonList type={`${type}`} updateTitle={(typeName) => setTitle(`${_.startCase(typeName)} Pokémon`)} />
     </View>
   );
 }
