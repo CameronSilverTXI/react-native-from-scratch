@@ -4,6 +4,7 @@ import Item from "./item";
 import { useQuery } from "@tanstack/react-query";
 import LoadingOrChildren from "../LoadingOrChildren";
 import axiosClient from "@/utils/axiosClient";
+import extractIdFromURL from "@/utils/extractId";
 
 type Props = {
     type: string
@@ -52,7 +53,7 @@ const PokemonList: React.FC<Props> = ({type, updateTitle}: Props) => {
     <LoadingOrChildren isLoading={isPending} overrideMessage={overrideMessage}>
       <FlashList
           data={pokemonList}
-          renderItem={({ item }) => <Item title={item.pokemon.name}/>}
+          renderItem={({ item }) => <Item title={item.pokemon.name} id={extractIdFromURL(item.pokemon.url)}/>}
           estimatedItemSize={200}
       />
     </LoadingOrChildren>

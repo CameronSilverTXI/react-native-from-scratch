@@ -4,14 +4,15 @@ import { Text, ColorSchemeName, StyleSheet, useColorScheme, View, Button, Toucha
 
 type Props = {
     title: string,
+    id: string,
 }
 
-const Item: React.FC<Props> = ({title}: Props) => {
+const Item: React.FC<Props> = ({title, id}: Props) => {
 
     const colorScheme = useColorScheme();
 
     return (
-        <Link href={`/info/${title}`} asChild >
+        <Link href={`/info/${id}`} asChild >
             <TouchableNativeFeedback>
                 <View style={createStyles(colorScheme).container}>
                     <Text style={createStyles(colorScheme).text} >{title}</Text>
