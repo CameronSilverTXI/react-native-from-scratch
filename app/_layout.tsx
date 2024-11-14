@@ -1,18 +1,19 @@
 import { Stack } from "expo-router";
-import { StyleSheet, useColorScheme } from "react-native";
+import { ColorSchemeName, StyleSheet, useColorScheme } from "react-native";
 import ColorScheme from "@/theme";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function RootLayout() {
-  const colors = ColorScheme(useColorScheme())
+  const colorScheme = useColorScheme()
+  const colors = ColorScheme(colorScheme)
 
   // Setup the ReactQuery client.
   const queryClient = new QueryClient()
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView style={createStyles(colorScheme).safeArea}>
         <Stack
           screenOptions={{
             headerStyle: {
@@ -28,8 +29,13 @@ export default function RootLayout() {
   )
 }
 
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-});
+const createStyles = (colorSchemeName: ColorSchemeName) => {
+
+  const colors = ColorScheme(colorSchemeName)
+  return StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+  });
+}
