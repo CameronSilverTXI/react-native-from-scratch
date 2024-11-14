@@ -1,6 +1,6 @@
 import ColorScheme from "@/theme"
 import { Link } from "expo-router"
-import { Text, ColorSchemeName, StyleSheet, useColorScheme, View, Button, TouchableNativeFeedback } from "react-native"
+import { Text, ColorSchemeName, StyleSheet, useColorScheme, View, TouchableNativeFeedback } from "react-native"
 
 type Props = {
     title: string,
@@ -9,18 +9,15 @@ type Props = {
 
 const Item: React.FC<Props> = ({title, type}: Props) => {
 
-    const colorScheme = useColorScheme();
-
-    const onPress = (pokemonType: string) => {
-
-    }
+    const colorScheme = useColorScheme()
+    const styles = createStyles(colorScheme)
 
     return (
         <Link href={`/type/${type}`} asChild >
             <TouchableNativeFeedback>
-                <View style={createStyles(colorScheme).container}>
-                    <Text style={createStyles(colorScheme).text} >{title}</Text>
-                    <Text style={createStyles(colorScheme).text} >{">"}</Text>
+                <View style={styles.container}>
+                    <Text style={styles.text} >{title}</Text>
+                    <Text style={styles.text} >{">"}</Text>
                 </View>
             </TouchableNativeFeedback>
         </Link>
