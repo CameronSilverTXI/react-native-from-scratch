@@ -45,9 +45,11 @@ const PokemonList: React.FC<Props> = ({type, updateTitle}: Props) => {
   useEffect(() => {
     updateTitle(typeName)
   }, [typeName])
+
+  const overrideMessage = (!pokemonListData || isError) ? "Unable to display Pokémon." : undefined
   
   return (
-    <LoadingOrChildren isLoading={isPending}>
+    <LoadingOrChildren isLoading={isPending} overrideMessage={overrideMessage}>
       <FlashList
           data={pokemonList}
           renderItem={({ item }) => <Item title={item.pokemon.name}/>}
