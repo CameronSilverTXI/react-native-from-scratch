@@ -23,8 +23,6 @@ type PokemonTypesData = {
 
 const PokemonTypes: React.FC = () => {
 
-  const DATA = Array.from({length: 20}, (_, i) => ({ type: `${i + 1}`}))
-
   const { isPending, isError, data: pokemonTypesData } = useQuery({
     queryKey: ['types'],
     queryFn: () => loadTypes(),
@@ -43,13 +41,26 @@ const PokemonTypes: React.FC = () => {
     return pokemonTypesData.results.sort((itemA, itemB) => (itemA.name.localeCompare(itemB.name)))
   }, [pokemonTypesData])
 
+  // Pulls the type-id out of the URL
+  const typeURLToTypeId = (typeURL: string): string => {
+    try {
+      const pathSplit = new URL(typeURL).pathname.split('/');
+      if (pathSplit.length <= 1) {
+        return "1"
+      }
+      return pathSplit[pathSplit.length - 2]
+    } catch {
+      return "1"
+    }
+  }
+
   const overrideMessage = (!pokemonTypesData || isError) ? "Unable to display Pokémon types." : undefined
   
   return (
     <LoadingOrChildren isLoading={isPending} overrideMessage={overrideMessage}>
       <FlashList
           data={pokemonTypes}
-          renderItem={({ item }) => <Item title={item.name} type={item.name}/>}
+          renderItem={({ item }) => <Item title={item.name} type={typeURLToTypeId(item.url)}/>}
           estimatedItemSize={200}
       />
     </LoadingOrChildren>
