@@ -9,7 +9,7 @@ export default function Index() {
 
   return (
     <View style={createStyles(colorScheme).container}>
-        <Stack.Screen options={{title: "Main"}} />
+        <Stack.Screen options={{title: "Types"}} />
         <PokemonTypes/>
     </View>
   );
