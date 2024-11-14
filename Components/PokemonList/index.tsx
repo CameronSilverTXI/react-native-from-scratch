@@ -1,18 +1,14 @@
 import React, { useEffect, useMemo } from "react";
 import { FlashList } from "@shopify/flash-list";
 import Item from "./item";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import LoadingOrChildren from "../LoadingOrChildren";
+import axiosClient from "@/utils/axiosClient";
 
 type Props = {
     type: string
     updateTitle: (title: string) => void
 }
-
-const client = axios.create({
-  baseURL: "https://pokeapi.co/api/v2/",
-})
 
 type PokemonListData = {
   name: string,
@@ -32,7 +28,7 @@ const PokemonList: React.FC<Props> = ({type, updateTitle}: Props) => {
   })
 
   const loadPokemonList = async () => {
-    const response = await client.get(`type/${type}`)
+    const response = await axiosClient.get(`type/${type}`)
     return response.data as PokemonListData
   }
 

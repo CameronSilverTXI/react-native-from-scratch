@@ -2,12 +2,8 @@ import React, { useMemo } from "react";
 import { FlashList } from "@shopify/flash-list";
 import Item from "./item";
 import LoadingOrChildren from "../LoadingOrChildren";
-import axios from 'axios'
 import { useQuery } from "@tanstack/react-query";
-
-const client = axios.create({
-  baseURL: "https://pokeapi.co/api/v2/",
-})
+import axiosClient from "@/utils/axiosClient";
 
 type PokemonTypesData = {
   count: number,
@@ -29,7 +25,7 @@ const PokemonTypes: React.FC = () => {
   })
 
   const loadTypes = async () => {
-    const response = await client.get("type?limit=50")
+    const response = await axiosClient.get("type?limit=50")
     return response.data as PokemonTypesData
   }
 
