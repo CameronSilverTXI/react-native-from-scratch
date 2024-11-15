@@ -23,6 +23,7 @@ export default function RootLayout() {
             headerTitleStyle: {
               fontWeight: 'bold',
             },
+            headerBackButtonDisplayMode: "minimal"
           }}/>
       </SafeAreaView>
     </QueryClientProvider>
