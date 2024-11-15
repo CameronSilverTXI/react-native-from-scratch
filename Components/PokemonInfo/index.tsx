@@ -1,10 +1,11 @@
 import ColorScheme from "@/theme"
 import axiosClient from "@/utils/axiosClient"
 import { useQuery } from "@tanstack/react-query"
-import { Text, ColorSchemeName, StyleSheet, useColorScheme, View, SectionList } from "react-native"
+import { Text, ColorSchemeName, StyleSheet, useColorScheme, View, SectionList, Image } from "react-native"
 import LoadingOrChildren from "../LoadingOrChildren"
-import { useEffect, useMemo } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Item from "./item"
+import SpriteComponent from "./spriteComp"
 
 type Props = {
     id: string
@@ -26,6 +27,10 @@ type PokemonInfoData = {
     ]
     types: [{type: {name: string}}]
     abilities: [{ability: {name: string}}]
+    sprites: {
+        front_default: string,
+        back_default: string
+    }
 }
 
 export type DataKeyValue = {
@@ -43,9 +48,15 @@ type Section = {
     title: string,
     data: DataItem[],
 }
+
+type ImageURLS = {
+    front?: string,
+    back?: string,
+}
   
 const PokemonInfo: React.FC<Props> = ({id, updateTitle}: Props) => {
 
+    const [imageSize, setImageSize] = useState<{width: number, height: number}>({width: 0, height: 0})
     const { isPending, isError, data: pokemonInfoData } = useQuery({
         queryKey: ['pokemonInfo', id],
         queryFn: () => loadPokemonInfo(),
@@ -57,7 +68,7 @@ const PokemonInfo: React.FC<Props> = ({id, updateTitle}: Props) => {
     }
 
     // All the data for the segmented list.
-    const pokemonInfo = useMemo(() => {
+    const {pokemonInfo, imageUrls} = useMemo(() => {
 
         const pokemonInfo: Section[] = [];
         if (pokemonInfoData) {
@@ -123,7 +134,12 @@ const PokemonInfo: React.FC<Props> = ({id, updateTitle}: Props) => {
             }
 
         }
-        return pokemonInfo
+        const imageUrls: ImageURLS = {
+            front: pokemonInfoData?.sprites.front_default,
+            back: pokemonInfoData?.sprites.back_default
+        }
+
+        return {pokemonInfo, imageUrls}
     }, [pokemonInfoData])
 
     useEffect(() => {
@@ -149,6 +165,8 @@ const PokemonInfo: React.FC<Props> = ({id, updateTitle}: Props) => {
                 renderItem={({item}) => <Item dataItem={item}/>}
                 ItemSeparatorComponent={() => <View style={styles.itemSeparator}/>}
                 SectionSeparatorComponent={() => <View style={styles.sectionSeparator}/>}
+                ListHeaderComponent={() => <SpriteComponent url={imageUrls.front}/>}
+                ListFooterComponent={() => <SpriteComponent url={imageUrls.back}/>}
             />
         </LoadingOrChildren>
     )
