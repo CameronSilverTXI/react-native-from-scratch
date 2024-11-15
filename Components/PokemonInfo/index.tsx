@@ -147,6 +147,7 @@ const PokemonInfo: React.FC<Props> = ({id, updateTitle}: Props) => {
                     <Text style={styles.header}>{title}</Text>
                 )}
                 renderItem={({item}) => <Item dataItem={item}/>}
+                ItemSeparatorComponent={() => <View style={styles.itemSeparator}/>}
                 SectionSeparatorComponent={() => <View style={styles.sectionSeparator}/>}
             />
         </LoadingOrChildren>
@@ -167,6 +168,9 @@ const createStyles = (colorSchemeName: ColorSchemeName) => {
       },
       sectionSeparator: {
         height: 20
+      },
+      itemSeparator: {
+        height: 10
       },
       text: {
         color: colors.text,

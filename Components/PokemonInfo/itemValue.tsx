@@ -27,8 +27,6 @@ const createStyles = (colorSchemeName: ColorSchemeName) => {
         display: "flex",
         flexDirection: 'row',
         justifyContent: 'center',
-        paddingHorizontal: 20,
-        paddingVertical: 5,
       },
     text: {
         color: colors.text,

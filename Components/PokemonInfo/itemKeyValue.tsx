@@ -32,8 +32,6 @@ const createStyles = (colorSchemeName: ColorSchemeName) => {
         display: "flex",
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 20,
-        paddingVertical: 5,
       },
     containerKey: {
         flex: 1,
